@@ -15,7 +15,10 @@ public class Main {
         //probarFactoryMethod();
 
         //#2
-        probarAbstractFactoryMethod();
+        //probarAbstractFactoryMethod();
+
+        //#3
+        probarBuilder();
     }
 
     private static void probarFactoryMethod(){
@@ -31,5 +34,21 @@ public class Main {
         PaymentMethod paymentMethod = (PaymentMethod) abstractFactory1.create("DEBIT");
 
         System.out.println("Una tarjeta de tipo: " + tarjeta.getCardType() + " con el método de pago: " + paymentMethod.doPayment());
+    }
+
+    public static void probarBuilder(){
+        com.company.creational.builder.Card card = new com.company.creational.builder.Card.CardBuilder("VISA",
+                "0000 1111 2222 3333")
+                .name("Alberto")
+                .expires(2030)
+                .credit(true)
+                .build();
+
+        System.out.println("card = " + card);
+
+        com.company.creational.builder.Card card2 = new com.company.creational.builder.Card.CardBuilder("VISA",
+                "0000 9999 9999 9999")
+                .build();
+        System.out.println("card2 = " + card2);
     }
 }
