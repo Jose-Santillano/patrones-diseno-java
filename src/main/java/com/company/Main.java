@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.behavioral.chainofresponsability.Tarjeta;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -16,28 +17,30 @@ import static com.company.creational.protitype.PrototypeFactory.CartType.VISA;
 public class Main {
     public static void main(String[] args) {
 
+        //PATRONES CREACIONALES.
         //#1
         //probarFactoryMethod();
-
         //#2
         //probarAbstractFactoryMethod();
-
         //#3
         //probarBuilder();
-
         //#4
         //probarPrototype();
-
         //#5
-        probarSinglenton();
+        //probarSinglenton();
+
+        //PATRONES DE COMPORTAMIENTO
+        //#6
+        probarChainOfResponsability();
     }
 
+    //#1
     private static void probarFactoryMethod(){
         Payment payment = PaymentFactory.buildPayment(TypePayment.CARD);
         payment.doPayment();
     }
 
-    //#1
+    //#2
     private static void probarAbstractFactoryMethod(){
         AbstractFactory abstractFactory = FactoryProvider.getFactory("Card");
         Card tarjeta = (Card) abstractFactory.create("VISA");
@@ -48,7 +51,7 @@ public class Main {
         System.out.println("Una tarjeta de tipo: " + tarjeta.getCardType() + " con el método de pago: " + paymentMethod.doPayment());
     }
 
-    //#2
+    //#3
     public static void probarBuilder(){
         com.company.creational.builder.Card card = new com.company.creational.builder.Card.CardBuilder("VISA",
                 "0000 1111 2222 3333")
@@ -65,7 +68,7 @@ public class Main {
         System.out.println("card2 = " + card2);
     }
 
-    //#3
+    //#4
     public static void probarPrototype(){
         PrototypeFactory.loadCard();
         try {
@@ -80,9 +83,16 @@ public class Main {
         }
     }
 
-    //#4
+    //#5
     private static void probarSinglenton(){
         com.company.creational.singlenton.Card.getINSTANCE().setCardNumber("1234 5678 9101 1121");
         System.out.println(com.company.creational.singlenton.Card.getINSTANCE().getCardNumber());
     }
+
+    //#6
+    private static void probarChainOfResponsability(){
+        Tarjeta tarjeta = new Tarjeta();
+        tarjeta.creditCardRequest(100000);
+    }
+
 }
