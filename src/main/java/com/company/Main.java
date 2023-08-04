@@ -26,7 +26,10 @@ public class Main {
         //probarBuilder();
 
         //#4
-        probarPrototype();
+        //probarPrototype();
+
+        //#5
+        probarSinglenton();
     }
 
     private static void probarFactoryMethod(){
@@ -34,6 +37,7 @@ public class Main {
         payment.doPayment();
     }
 
+    //#1
     private static void probarAbstractFactoryMethod(){
         AbstractFactory abstractFactory = FactoryProvider.getFactory("Card");
         Card tarjeta = (Card) abstractFactory.create("VISA");
@@ -44,6 +48,7 @@ public class Main {
         System.out.println("Una tarjeta de tipo: " + tarjeta.getCardType() + " con el método de pago: " + paymentMethod.doPayment());
     }
 
+    //#2
     public static void probarBuilder(){
         com.company.creational.builder.Card card = new com.company.creational.builder.Card.CardBuilder("VISA",
                 "0000 1111 2222 3333")
@@ -60,6 +65,7 @@ public class Main {
         System.out.println("card2 = " + card2);
     }
 
+    //#3
     public static void probarPrototype(){
         PrototypeFactory.loadCard();
         try {
@@ -72,5 +78,11 @@ public class Main {
         } catch (CloneNotSupportedException ex) {
             ex.printStackTrace(System.out);
         }
+    }
+
+    //#4
+    private static void probarSinglenton(){
+        com.company.creational.singlenton.Card.getINSTANCE().setCardNumber("1234 5678 9101 1121");
+        System.out.println(com.company.creational.singlenton.Card.getINSTANCE().getCardNumber());
     }
 }
