@@ -1,6 +1,10 @@
 package com.company;
 
 import com.company.behavioral.chainofresponsability.Tarjeta;
+import com.company.behavioral.command.CreditCard;
+import com.company.behavioral.command.CreditCardActivateCommand;
+import com.company.behavioral.command.CreditCardDesactivateCommand;
+import com.company.behavioral.command.CreditCardInvoker;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -31,7 +35,9 @@ public class Main {
 
         //PATRONES DE COMPORTAMIENTO
         //#6
-        probarChainOfResponsability();
+        //probarChainOfResponsability();
+        //#7
+        probarCommand();
     }
 
     //#1
@@ -93,6 +99,20 @@ public class Main {
     private static void probarChainOfResponsability(){
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.creditCardRequest(100000);
+    }
+
+    //#7
+    public static void probarCommand(){
+        CreditCard creditCard = new CreditCard();
+        CreditCard creditCardDesactivate = new CreditCard();
+
+        CreditCardInvoker invoker = new CreditCardInvoker();
+        invoker.setCommand(new CreditCardActivateCommand((creditCard)));
+        invoker.run();
+        System.out.println("---");
+
+        invoker.setCommand(new CreditCardDesactivateCommand(creditCardDesactivate));
+        invoker.run();
     }
 
 }
