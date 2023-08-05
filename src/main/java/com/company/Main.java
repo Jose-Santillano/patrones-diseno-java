@@ -5,6 +5,9 @@ import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
 import com.company.behavioral.command.CreditCardDesactivateCommand;
 import com.company.behavioral.command.CreditCardInvoker;
+import com.company.behavioral.iterator.CardList;
+import com.company.behavioral.iterator.Iterator;
+import com.company.behavioral.iterator.List;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -37,7 +40,10 @@ public class Main {
         //#6
         //probarChainOfResponsability();
         //#7
-        probarCommand();
+        //probarCommand();
+        //#8
+        probarIterator();
+
     }
 
     //#1
@@ -115,4 +121,23 @@ public class Main {
         invoker.run();
     }
 
+    //#8
+    public static void probarIterator(){
+        com.company.behavioral.iterator.Card[] cards = new com.company.behavioral.iterator.Card[5];
+        cards[0] = new com.company.behavioral.iterator.Card("VISA");
+        cards[1] = new com.company.behavioral.iterator.Card("AMEX");
+        cards[2] = new com.company.behavioral.iterator.Card("MASTERCARD");
+        cards[3] = new com.company.behavioral.iterator.Card("GOOGLE CARD");
+        cards[4] = new com.company.behavioral.iterator.Card("APPLE CARD");
+
+        List lista = new CardList(cards);
+
+        Iterator iterator = lista.iterator();
+
+        while(iterator.hasNext()){
+            com.company.behavioral.iterator.Card tarjeta = (com.company.behavioral.iterator.Card) iterator.next();
+            System.out.println(tarjeta.getType());
+        }
+
+    }
 }
