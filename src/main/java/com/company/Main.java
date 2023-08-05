@@ -14,6 +14,10 @@ import com.company.behavioral.mediator.ConcreteMediator;
 import com.company.behavioral.memento.Article;
 import com.company.behavioral.memento.ArticleMemento;
 import com.company.behavioral.memento.Carataker;
+import com.company.behavioral.observer.Coche;
+import com.company.behavioral.observer.MessagePublisher;
+import com.company.behavioral.observer.Peaton;
+import com.company.behavioral.observer.Semaforo;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -52,8 +56,9 @@ public class Main {
         //#9
         //probarMediator();
         //#10
-        probarMemento();
-
+        //probarMemento();
+        //#11
+        probarObserver();
 
     }
 
@@ -190,6 +195,26 @@ public class Main {
 
         article.restoreMemento(memento2);
         System.out.println(article.getText());
+
+    }
+
+    //#11
+    private static void probarObserver(){
+        Coche coche = new Coche();
+        Peaton peaton = new Peaton();
+        MessagePublisher messagePublisher = new MessagePublisher();
+        messagePublisher.attach(coche);
+        messagePublisher.attach(peaton);
+
+        messagePublisher.nofityUpdate(new Semaforo("ROJO_COCHE"));
+
+        try{
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        messagePublisher.nofityUpdate(new Semaforo("VERDE_COCHE"));
 
     }
 }
