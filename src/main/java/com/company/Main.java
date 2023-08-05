@@ -8,6 +8,9 @@ import com.company.behavioral.command.CreditCardInvoker;
 import com.company.behavioral.iterator.CardList;
 import com.company.behavioral.iterator.Iterator;
 import com.company.behavioral.iterator.List;
+import com.company.behavioral.mediator.ConcreteColleage1;
+import com.company.behavioral.mediator.ConcreteColleage2;
+import com.company.behavioral.mediator.ConcreteMediator;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -42,7 +45,9 @@ public class Main {
         //#7
         //probarCommand();
         //#8
-        probarIterator();
+        //probarIterator();
+        //#9
+        probarMediator();
 
     }
 
@@ -108,7 +113,7 @@ public class Main {
     }
 
     //#7
-    public static void probarCommand(){
+    private static void probarCommand(){
         CreditCard creditCard = new CreditCard();
         CreditCard creditCardDesactivate = new CreditCard();
 
@@ -122,7 +127,7 @@ public class Main {
     }
 
     //#8
-    public static void probarIterator(){
+    private static void probarIterator(){
         com.company.behavioral.iterator.Card[] cards = new com.company.behavioral.iterator.Card[5];
         cards[0] = new com.company.behavioral.iterator.Card("VISA");
         cards[1] = new com.company.behavioral.iterator.Card("AMEX");
@@ -139,5 +144,18 @@ public class Main {
             System.out.println(tarjeta.getType());
         }
 
+    }
+
+    //#9
+    private static void probarMediator(){
+        ConcreteMediator mediator = new ConcreteMediator();
+        ConcreteColleage1 user1 = new ConcreteColleage1(mediator);
+        ConcreteColleage2 user2 = new ConcreteColleage2(mediator);
+
+        mediator.setUser1(user1);
+        mediator.setUser2(user2);
+
+        user1.send("Hola soy user1.");
+        user2.send("Hola user1, soy user2.");
     }
 }
