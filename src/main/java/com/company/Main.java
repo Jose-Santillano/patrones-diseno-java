@@ -5,6 +5,10 @@ import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
 import com.company.behavioral.command.CreditCardDesactivateCommand;
 import com.company.behavioral.command.CreditCardInvoker;
+import com.company.behavioral.interpreter.AndExpression;
+import com.company.behavioral.interpreter.Expression;
+import com.company.behavioral.interpreter.OrExpression;
+import com.company.behavioral.interpreter.TerminalExpression;
 import com.company.behavioral.iterator.CardList;
 import com.company.behavioral.iterator.Iterator;
 import com.company.behavioral.iterator.List;
@@ -63,7 +67,9 @@ public class Main {
         //#11
         //probarObserver();
         //#12
-        probarState();
+        //probarState();
+        //#13
+        probarInterprete();
     }
 
     //#1
@@ -235,5 +241,20 @@ public class Main {
         context.setState(new Silent());
         context.alert();
         context.alert();
+    }
+
+    //#13
+    private static void probarInterprete(){
+        Expression cero = new TerminalExpression("0");
+        Expression uno = new TerminalExpression("1");
+
+        Expression containBoolean = new OrExpression(cero, uno);
+        Expression containOneAndCero = new AndExpression(cero, uno);
+
+        System.out.println(containBoolean.interpret("cero"));
+        System.out.println(containBoolean.interpret("0"));
+
+        System.out.println(containOneAndCero.interpret("0"));
+        System.out.println(containOneAndCero.interpret("0, 1"));
     }
 }
