@@ -18,6 +18,9 @@ import com.company.behavioral.observer.Coche;
 import com.company.behavioral.observer.MessagePublisher;
 import com.company.behavioral.observer.Peaton;
 import com.company.behavioral.observer.Semaforo;
+import com.company.behavioral.state.MobileAlertStateContext;
+import com.company.behavioral.state.Silent;
+import com.company.behavioral.state.Vibration;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -58,8 +61,9 @@ public class Main {
         //#10
         //probarMemento();
         //#11
-        probarObserver();
-
+        //probarObserver();
+        //#12
+        probarState();
     }
 
     //#1
@@ -216,5 +220,20 @@ public class Main {
 
         messagePublisher.nofityUpdate(new Semaforo("VERDE_COCHE"));
 
+    }
+
+    //#12
+    private static void probarState(){
+        MobileAlertStateContext context = new MobileAlertStateContext();
+        context.alert();
+        context.alert();
+
+        context.setState(new Vibration());
+        context.alert();
+        context.alert();
+
+        context.setState(new Silent());
+        context.alert();
+        context.alert();
     }
 }
