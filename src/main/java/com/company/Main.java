@@ -47,6 +47,7 @@ import com.company.structural.composite.CuentaAhorro;
 import com.company.structural.composite.CuentaComponent;
 import com.company.structural.composite.CuentaComposite;
 import com.company.structural.composite.CuentaCorriente;
+import com.company.structural.decorator.*;
 
 import static com.company.creational.protitype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.protitype.PrototypeFactory.CartType.VISA;
@@ -96,7 +97,9 @@ public class Main {
         //#18
         //probarBridge();
         //#19
-        probarComposite();
+        //probarComposite();
+        //#20
+        probarDecorator();
     }
 
     //#1
@@ -341,5 +344,26 @@ public class Main {
 
         cuentaComposite.showAccountName();
         cuentaComposite.getAmount();
+    }
+
+    //#20
+    private static void probarDecorator(){
+        Credit gold = new Gold();
+        Credit blackInternationalPayment = new Black();
+        //Le agregamos el pago internacional.
+        blackInternationalPayment = new InternationalPaymentDecorator(blackInternationalPayment);
+
+        Credit goldSecureInternational = new Gold();
+        goldSecureInternational = new InternationalPaymentDecorator(goldSecureInternational);
+        goldSecureInternational = new SecureDecorator(goldSecureInternational);
+
+        System.out.println("----- Tarjeta Gold con condiguracion -----");
+        gold.showCredit();
+
+        System.out.println("----- Tarjeta Black con condiguracion -----");
+        blackInternationalPayment.showCredit();
+
+        System.out.println("----- Tarjeta Gold2 con condiguracion -----");
+        goldSecureInternational.showCredit();
     }
 }
