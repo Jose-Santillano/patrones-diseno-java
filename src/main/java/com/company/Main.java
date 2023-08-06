@@ -48,6 +48,7 @@ import com.company.structural.composite.CuentaComponent;
 import com.company.structural.composite.CuentaComposite;
 import com.company.structural.composite.CuentaCorriente;
 import com.company.structural.decorator.*;
+import com.company.structural.facade.CreditMarket;
 
 import static com.company.creational.protitype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.protitype.PrototypeFactory.CartType.VISA;
@@ -99,7 +100,9 @@ public class Main {
         //#19
         //probarComposite();
         //#20
-        probarDecorator();
+        //probarDecorator();
+        //#21
+        probarFacade();
     }
 
     //#1
@@ -365,5 +368,13 @@ public class Main {
 
         System.out.println("----- Tarjeta Gold2 con condiguracion -----");
         goldSecureInternational.showCredit();
+    }
+
+    //#21
+    private static void probarFacade(){
+        CreditMarket creditMarket = new CreditMarket();
+        creditMarket.showCreditGold();
+        creditMarket.showCreditSilver();
+        creditMarket.showCreditBlack();
     }
 }
