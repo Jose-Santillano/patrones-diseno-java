@@ -49,6 +49,10 @@ import com.company.structural.composite.CuentaComposite;
 import com.company.structural.composite.CuentaCorriente;
 import com.company.structural.decorator.*;
 import com.company.structural.facade.CreditMarket;
+import com.company.structural.flyweight.Enemy;
+import com.company.structural.flyweight.EnemyFactory;
+
+import java.util.Random;
 
 import static com.company.creational.protitype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.protitype.PrototypeFactory.CartType.VISA;
@@ -102,7 +106,9 @@ public class Main {
         //#20
         //probarDecorator();
         //#21
-        probarFacade();
+        //probarFacade();
+        //#22
+        probarFlyweight();
     }
 
     //#1
@@ -377,4 +383,28 @@ public class Main {
         creditMarket.showCreditSilver();
         creditMarket.showCreditBlack();
     }
+
+    //#22
+    private static void probarFlyweight(){
+        for(int i=0; i<15; i++){
+            Enemy enemy = EnemyFactory.getEnemy(getRandomEnemyType());
+            enemy.setWeapon(getRandomWeapon());
+            enemy.lifePoints();
+        }
+    }
+
+    private static String getRandomWeapon(){
+        Random r = new Random();
+        int randInt = r.nextInt(weapon.length);
+        return weapon[randInt];
+    }
+
+    private static String getRandomEnemyType(){
+        Random r = new Random();
+        int randInt = r.nextInt(enemyType.length);
+        return enemyType[randInt];
+    }
+
+    private static String[] enemyType = {"Private", "Detective"};
+    private static String[] weapon = {"Fusil", "Revolver", "Pistola", "Metralleta", "Bazooka"};
 }
