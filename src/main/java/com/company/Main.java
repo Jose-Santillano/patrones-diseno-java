@@ -51,6 +51,8 @@ import com.company.structural.decorator.*;
 import com.company.structural.facade.CreditMarket;
 import com.company.structural.flyweight.Enemy;
 import com.company.structural.flyweight.EnemyFactory;
+import com.company.structural.proxy.Internet;
+import com.company.structural.proxy.ProxyInternet;
 
 import java.util.Random;
 
@@ -108,7 +110,9 @@ public class Main {
         //#21
         //probarFacade();
         //#22
-        probarFlyweight();
+        //probarFlyweight();
+        //#23
+        probarProxy();
     }
 
     //#1
@@ -407,4 +411,15 @@ public class Main {
 
     private static String[] enemyType = {"Private", "Detective"};
     private static String[] weapon = {"Fusil", "Revolver", "Pistola", "Metralleta", "Bazooka"};
+
+    //#23
+    private static void probarProxy(){
+        Internet internet = new ProxyInternet();
+        try {
+            internet.connectTo("udemy.com");
+            internet.connectTo("facebook.com");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
