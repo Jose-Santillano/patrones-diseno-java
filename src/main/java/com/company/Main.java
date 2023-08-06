@@ -81,7 +81,11 @@ public class Main {
         //#15
         //probarTemplateMethod();
         //#16
-        probarVisitor();
+        //probarVisitor();
+
+        //PATRONES ESTRUCTURALES
+        //#17
+        probarAdapter();
     }
 
     //#1
@@ -295,5 +299,14 @@ public class Main {
 
         ofertaElement = new OfertaVuelos();
         ofertaElement.accept(new ClassicCreditCardVisitor());
+    }
+
+    //#17
+    private static void probarAdapter(){
+        com.company.structural.adapter.CreditCard creditCard = new com.company.structural.adapter.CreditCard();
+        creditCard.pay("classic");
+        creditCard.pay("gold");
+        creditCard.pay("black");
+        creditCard.pay("silver");
     }
 }
