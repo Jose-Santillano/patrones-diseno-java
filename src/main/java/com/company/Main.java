@@ -40,6 +40,9 @@ import com.company.creational.factorymethod.PaymentFactory;
 import com.company.creational.factorymethod.TypePayment;
 import com.company.creational.protitype.PrototypeCard;
 import com.company.creational.protitype.PrototypeFactory;
+import com.company.structural.bridge.ClassicCreditCard;
+import com.company.structural.bridge.SecureCreditCard;
+import com.company.structural.bridge.UnsecureCreditCard;
 
 import static com.company.creational.protitype.PrototypeFactory.CartType.AMEX;
 import static com.company.creational.protitype.PrototypeFactory.CartType.VISA;
@@ -85,7 +88,9 @@ public class Main {
 
         //PATRONES ESTRUCTURALES
         //#17
-        probarAdapter();
+        //probarAdapter();
+        //#18
+        probarBridge();
     }
 
     //#1
@@ -308,5 +313,14 @@ public class Main {
         creditCard.pay("gold");
         creditCard.pay("black");
         creditCard.pay("silver");
+    }
+
+    //#18
+    private static void probarBridge(){
+        com.company.structural.bridge.CreditCard classic = new ClassicCreditCard(new UnsecureCreditCard());
+        classic.realizarPago();
+
+        classic = new ClassicCreditCard(new SecureCreditCard());
+        classic.realizarPago();
     }
 }
