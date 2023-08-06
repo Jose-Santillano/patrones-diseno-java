@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.behavioral.Visitor.*;
 import com.company.behavioral.chainofresponsability.Tarjeta;
 import com.company.behavioral.command.CreditCard;
 import com.company.behavioral.command.CreditCardActivateCommand;
@@ -78,7 +79,9 @@ public class Main {
         //#14
         //probarStrategy();
         //#15
-        probarTemplateMethod();
+        //probarTemplateMethod();
+        //#16
+        probarVisitor();
     }
 
     //#1
@@ -283,5 +286,14 @@ public class Main {
 
         payment = new Paypal();
         payment.makePayment();
+    }
+
+    //#16
+    private static void probarVisitor(){
+        OfertaElement ofertaElement = new OfertaGasolina();
+        ofertaElement.accept(new BlackCreditCardVisitor());
+
+        ofertaElement = new OfertaVuelos();
+        ofertaElement.accept(new ClassicCreditCardVisitor());
     }
 }
