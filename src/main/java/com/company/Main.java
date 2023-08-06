@@ -28,6 +28,8 @@ import com.company.behavioral.state.Vibration;
 import com.company.behavioral.strategy.CapitalStrategyTextFormatter;
 import com.company.behavioral.strategy.Context;
 import com.company.behavioral.strategy.LowerStrategyTestFormatter;
+import com.company.behavioral.templatemethod.Paypal;
+import com.company.behavioral.templatemethod.Visa;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -74,7 +76,9 @@ public class Main {
         //#13
         //probarInterprete();
         //#14
-        probarStrategy();
+        //probarStrategy();
+        //#15
+        probarTemplateMethod();
     }
 
     //#1
@@ -270,5 +274,14 @@ public class Main {
 
         context = new Context(new LowerStrategyTestFormatter());
         context.publishText("ESTO será CONVERTIDO a minuscula.");
+    }
+
+    //#15
+    private static void probarTemplateMethod(){
+        com.company.behavioral.templatemethod.Payment payment = new Visa();
+        payment.makePayment();
+
+        payment = new Paypal();
+        payment.makePayment();
     }
 }
