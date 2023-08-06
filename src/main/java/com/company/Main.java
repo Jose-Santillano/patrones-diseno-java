@@ -25,6 +25,9 @@ import com.company.behavioral.observer.Semaforo;
 import com.company.behavioral.state.MobileAlertStateContext;
 import com.company.behavioral.state.Silent;
 import com.company.behavioral.state.Vibration;
+import com.company.behavioral.strategy.CapitalStrategyTextFormatter;
+import com.company.behavioral.strategy.Context;
+import com.company.behavioral.strategy.LowerStrategyTestFormatter;
 import com.company.creational.abstractfactory.AbstractFactory;
 import com.company.creational.abstractfactory.Card;
 import com.company.creational.abstractfactory.FactoryProvider;
@@ -69,7 +72,9 @@ public class Main {
         //#12
         //probarState();
         //#13
-        probarInterprete();
+        //probarInterprete();
+        //#14
+        probarStrategy();
     }
 
     //#1
@@ -256,5 +261,14 @@ public class Main {
 
         System.out.println(containOneAndCero.interpret("0"));
         System.out.println(containOneAndCero.interpret("0, 1"));
+    }
+
+    //#14
+    private static void probarStrategy(){
+        Context context = new Context(new CapitalStrategyTextFormatter());
+        context.publishText("Esto será convertido a mayuscula.");
+
+        context = new Context(new LowerStrategyTestFormatter());
+        context.publishText("ESTO será CONVERTIDO a minuscula.");
     }
 }
